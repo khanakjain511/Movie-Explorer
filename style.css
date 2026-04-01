@@ -1,0 +1,32 @@
+body {
+  text-align: center;
+  font-family: Arial;
+}
+
+#search {
+  padding: 10px;
+  width: 200px;
+}
+
+button {
+  padding: 10px;
+  margin-left: 5px;
+}
+
+#movies {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.movie {
+  border: 1px solid black;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+}
+
+.movie img {
+  width: 100%;
+}
