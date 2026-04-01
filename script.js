@@ -1,34 +1,51 @@
-const API_KEY = "45d2bf00";
+const API_KEY = "758a4fd9";
 
-function searchMovie() {
-  let query = document.getElementById("search").value;
-  let moviesDiv = document.getElementById("movies");
+const searchInput = document.getElementById("search");
+const button = document.getElementById("btn");
+const moviesDiv = document.getElementById("movies");
+const statusText = document.getElementById("status");
 
-  moviesDiv.innerHTML = "Loading...";
+function fetchMovies(query) {
+  statusText.innerText = "Loading...";
+  moviesDiv.innerHTML = "";
 
   fetch(`https://www.omdbapi.com/?s=${query}&apikey=${API_KEY}`)
-    .then(res => res.json())
+    .then(response => response.json())
     .then(data => {
-      moviesDiv.innerHTML = "";
-
       if (data.Response === "True") {
-        data.Search.map(movie => {
-          let div = document.createElement("div");
-          div.className = "movie";
-
-          div.innerHTML = `
-            <img src="${movie.Poster}" />
-            <h3>${movie.Title}</h3>
-            <p>${movie.Year}</p>
-          `;
-
-          moviesDiv.appendChild(div);
-        });
+        displayMovies(data.Search);
+        statusText.innerText = "";
       } else {
-        moviesDiv.innerHTML = "No movies found";
+        statusText.innerText = "No movies found";
       }
     })
     .catch(() => {
-      moviesDiv.innerHTML = "Error loading data";
+      statusText.innerText = "Error fetching data";
     });
 }
+
+// Display movies
+function displayMovies(movies) {
+  moviesDiv.innerHTML = "";
+
+  movies.map(movie => {
+    const div = document.createElement("div");
+    div.className = "movie";
+
+    div.innerHTML = `
+      <img src="${movie.Poster !== "N/A" ? movie.Poster : "https://via.placeholder.com/200"}" />
+      <h3>${movie.Title}</h3>
+      <p>${movie.Year}</p>
+    `;
+
+    moviesDiv.appendChild(div);
+  });
+}
+
+button.addEventListener("click", () => {
+  const query = searchInput.value.trim();
+
+  if (query !== "") {
+    fetchMovies(query);
+  }
+});

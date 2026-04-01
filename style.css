@@ -1,32 +1,34 @@
 body {
   text-align: center;
   font-family: Arial;
+  margin: 20px;
 }
 
-#search {
+input {
   padding: 10px;
-  width: 200px;
+  width: 220px;
 }
 
 button {
   padding: 10px;
-  margin-left: 5px;
+  cursor: pointer;
 }
 
 #movies {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
   margin-top: 20px;
 }
 
 .movie {
-  border: 1px solid black;
-  margin: 10px;
+  border: 1px solid #ddd;
   padding: 10px;
-  width: 200px;
+  border-radius: 10px;
 }
 
 .movie img {
   width: 100%;
+  height: 300px;
+  object-fit: cover;
 }
