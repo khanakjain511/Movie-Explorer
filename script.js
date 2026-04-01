@@ -1,4 +1,4 @@
-const API_KEY = "your_api_key_here";
+const API_KEY = "45d2bf00";
 
 function searchMovie() {
   let query = document.getElementById("search").value;
